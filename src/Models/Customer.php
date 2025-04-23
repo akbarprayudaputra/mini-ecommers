@@ -4,10 +4,22 @@ namespace MiniECommers\Backend\Models;
 
 class Customer
 {
+    private ?int $id = null;
     private ?string $firstName = null;
     private ?string $lastName = null;
     private ?string $email = null;
     private ?string $address = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+    public function setId(?int $id): Customer
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get the value of firstName

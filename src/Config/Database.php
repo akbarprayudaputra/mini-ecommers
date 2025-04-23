@@ -12,11 +12,15 @@ class Database
             require_once __DIR__ . "/../../config/database.php";
             $config = getDatabaseConfig();
 
-            self::$pdo = new \PDO(
-                dsn: $config["database"][$env]["url"],
-                username: $config["database"][$env]["username"],
-                password: $config["database"][$env]["password"],
-            );
+            try {
+                self::$pdo = new \PDO(
+                    dsn: $config["database"][$env]["url"],
+                    username: $config["database"][$env]["username"],
+                    password: $config["database"][$env]["password"],
+                );
+            } catch (\PDOException $e) {
+                throw new \Exception("Failed to connect database: " . $e->getMessage(), 500);
+            }
         }
 
         return self::$pdo;
