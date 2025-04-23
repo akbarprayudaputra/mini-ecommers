@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Akbarprayuda\\PhpMvc\\Test\\Config\\DatabaseTest::testGetConnection":8},"times":{"Akbarprayuda\\PhpMvc\\Test\\Config\\DatabaseTest::testGetConnection":0.015,"Akbarprayuda\\PhpMvc\\Test\\Config\\DatabaseTest::testGetConnectionSingleton":0.01}}

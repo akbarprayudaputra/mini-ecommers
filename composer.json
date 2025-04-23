@@ -7,6 +7,11 @@
             "MiniECommers\\Backend\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "MiniECommers\\Backend\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Akbarprayuda21",
