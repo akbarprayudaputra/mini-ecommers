@@ -4,7 +4,8 @@ namespace MiniECommers\Backend\Models;
 
 class Category
 {
-    private ?string $name;
+    private ?int $id = null;
+    private ?string $name = null;
 
     /**
      * Get the value of name
@@ -22,6 +23,26 @@ class Category
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
 
         return $this;
     }

@@ -4,6 +4,7 @@ namespace MiniECommers\Backend\Models;
 
 class Product
 {
+    private ?int $id;
     private ?string $name = null;
     private ?string $description = null;
     private ?int $price = null;
@@ -85,6 +86,26 @@ class Product
     public function setStockQuantity($stockQuantity): static
     {
         $this->stockQuantity = $stockQuantity;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
 
         return $this;
     }
