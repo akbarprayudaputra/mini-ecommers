@@ -1,0 +1,19 @@
+{
+    "name": "mini-e-commers/backend",
+    "description": "Mini E-Commers Backend",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MiniECommers\\Backend\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Akbarprayuda21",
+            "email": "akbarprayuda210806@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^11.5"
+    }
+}
