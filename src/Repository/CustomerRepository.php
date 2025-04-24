@@ -2,7 +2,6 @@
 
 namespace MiniECommers\Backend\Repository;
 
-use Exception;
 use MiniECommers\Backend\Models\Customer;
 
 class CustomerRepository
@@ -27,7 +26,7 @@ class CustomerRepository
         $stmt = $this->connection->prepare("INSERT INTO customers (firstName, lastName, email, address) VALUES (?, ?, ?, ?)");
         $stmt->execute([$customer->getFirstName(), $customer->getLastName(), $customer->getEmail(), $customer->getAddress()]);
 
-        $customer->setId($this->connection->lastInsertId());
+        $customer->setId((int)$this->connection->lastInsertId());
 
         return $customer;
     }
@@ -36,8 +35,9 @@ class CustomerRepository
     {
         $stmt = $this->connection->prepare("SELECT id, firstName, lastName, email, address FROM customers WHERE id = ?");
         $stmt->execute([$id]);
+
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if ($result === null) {
+        if ($result === false) {
             return null;
         }
 
@@ -54,9 +54,7 @@ class CustomerRepository
     public function updateCustomer(Customer $customer): Customer
     {
         $stmt = $this->connection->prepare("UPDATE customers SET firstName = ?, lastName = ?, email = ?, address = ? WHERE id = ?");
-
-        // Periksa apakah eksekusi berhasil
-        $success = $stmt->execute([
+        $stmt->execute([
             $customer->getFirstName(),
             $customer->getLastName(),
             $customer->getEmail(),
@@ -64,14 +62,8 @@ class CustomerRepository
             $customer->getId()
         ]);
 
-        if (!$success) {
-            throw new Exception("Gagal memperbarui data pelanggan. Error: " . implode(" - ", $stmt->errorInfo()));
-        }
-
         return $customer;
     }
-
-
 
     public function deleteCustomer(Customer $customer): bool
     {
@@ -81,7 +73,7 @@ class CustomerRepository
         return $stmt->rowCount() > 0;
     }
 
-    public function deleteAllCustomer()
+    public function deleteAllCustomer(): void
     {
         $stmt = $this->connection->prepare("DELETE FROM customers");
         $stmt->execute();
