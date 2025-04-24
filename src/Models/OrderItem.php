@@ -2,7 +2,7 @@
 
 namespace MiniECommers\Backend\Models;
 
-class OrderItem
+class OrderItem implements \JsonSerializable
 {
     private ?int $id = null;
     private ?int $order_id = null;
@@ -111,5 +111,16 @@ class OrderItem
         $this->id = $id;
 
         return $this;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            "id" => $this->id,
+            "order_id" => $this->order_id,
+            "product_id" => $this->product_id,
+            "quantity" => $this->quantity,
+            "totalPrice" => $this->totalPrice,
+        ];
     }
 }

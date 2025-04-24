@@ -2,7 +2,9 @@
 
 namespace MiniECommers\Backend\Models;
 
-class Product
+use JsonSerializable;
+
+class Product implements JsonSerializable
 {
     private ?int $id;
     private ?string $name = null;
@@ -129,5 +131,16 @@ class Product
         $this->category_id = $category_id;
 
         return $this;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            "id" => $this->getId(),
+            "name" => $this->getName(),
+            "description" => $this->getDescription(),
+            "price" => $this->getPrice(),
+            "stockQuantity" => $this->getStockQuantity(),
+        ];
     }
 }

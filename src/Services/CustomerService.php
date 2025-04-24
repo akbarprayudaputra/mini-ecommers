@@ -33,6 +33,7 @@ class CustomerService
     public function getAllCustomers(): array
     {
         // Ambil semua pelanggan melalui repository
+        $customers = $this->customerRepository->getAllCustomer();
         return $this->customerRepository->getAllCustomer();
     }
 

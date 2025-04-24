@@ -2,7 +2,9 @@
 
 namespace MiniECommers\Backend\Models;
 
-class Customer
+use JsonSerializable;
+
+class Customer implements \JsonSerializable
 {
     private ?int $id = null;
     private ?string $firstName = null;
@@ -99,5 +101,15 @@ class Customer
         $this->address = $address;
 
         return $this;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'firstName' => $this->firstName,
+            'lastName' => $this->lastName,
+            'email' => $this->email,
+            'address' => $this->address,
+        ];
     }
 }

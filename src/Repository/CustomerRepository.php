@@ -15,7 +15,7 @@ class CustomerRepository
 
     public function getAllCustomer(): array
     {
-        $stmt = $this->connection->prepare("SELECT firstName, lastName, email, address FROM customers");
+        $stmt = $this->connection->prepare("SELECT id, firstName, lastName, email, address FROM customers");
         $stmt->execute();
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -47,7 +47,6 @@ class CustomerRepository
         $customer->setLastName($result["lastName"]);
         $customer->setEmail($result["email"]);
         $customer->setAddress($result["address"]);
-
         return $customer;
     }
 

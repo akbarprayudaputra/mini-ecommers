@@ -28,6 +28,28 @@ class Router
         ];
     }
 
+    public static function delete(string $path, string $controller, string $function, array $middleware = [])
+    {
+        self::$routes[] = [
+            "method" => "DELETE",
+            "path" => $path,
+            "controller" => $controller,
+            "function" => $function,
+            "middlewares" => $middleware,
+        ];
+    }
+
+    public static function put(string $path, string $controller, string $function, array $middleware = [])
+    {
+        self::$routes[] = [
+            "method" => "PUT",
+            "path" => $path,
+            "controller" => $controller,
+            "function" => $function,
+            "middlewares" => $middleware,
+        ];
+    }
+
     public static function run()
     {
         $path = "/";

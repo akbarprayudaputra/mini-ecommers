@@ -2,7 +2,9 @@
 
 namespace MiniECommers\Backend\Models;
 
-class Category
+use JsonSerializable;
+
+class Category implements JsonSerializable
 {
     private ?int $id = null;
     private ?string $name = null;
@@ -45,5 +47,13 @@ class Category
         $this->id = $id;
 
         return $this;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            "id" => $this->getId(),
+            "name" => $this->getName(),
+        ];
     }
 }
