@@ -79,6 +79,7 @@ class Router
         }
 
         http_response_code(404);
-        echo "<h1>404 Not Found</h1>" . PHP_EOL;
+        echo json_encode(["error" => "404 Not Found"]);
+        // echo "<h1>404 Not Found</h1>" . PHP_EOL;
     }
 }

@@ -61,7 +61,6 @@ class CustomerController
 
 
             if ($customer == null) {
-                var_dump($customer);
                 // Kirim respons jika pelanggan tidak ditemukan
                 http_response_code(404);
                 echo Json::encode(['error' => "Customer with ID {$id} not found."]);
