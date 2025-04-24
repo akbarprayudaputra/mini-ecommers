@@ -7,7 +7,8 @@ class Product
     private ?int $id;
     private ?string $name = null;
     private ?string $description = null;
-    private ?int $price = null;
+    private ?int $category_id = null;
+    private ?float $price = null;
     private ?int $stockQuantity = null;
 
     /**
@@ -53,7 +54,7 @@ class Product
     /**
      * Get the value of price
      */
-    public function getPrice(): int|null
+    public function getPrice(): ?float
     {
         return $this->price;
     }
@@ -63,9 +64,9 @@ class Product
      *
      * @return  self
      */
-    public function setPrice($price): static
+    public function setPrice(float $price): static
     {
-        $this->price = $price;
+        $this->price =  $price;
 
         return $this;
     }
@@ -106,6 +107,26 @@ class Product
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of category_id
+     */
+    public function getCategory_id()
+    {
+        return $this->category_id;
+    }
+
+    /**
+     * Set the value of category_id
+     *
+     * @return  self
+     */
+    public function setCategory_id($category_id)
+    {
+        $this->category_id = $category_id;
 
         return $this;
     }

@@ -35,6 +35,7 @@ class CategoriyRepository
     {
         $stmt = $this->connection->prepare("INSERT INTO categories (name) VALUES (?)");
         $stmt->execute([$category->getName()]);
+
         $category->setId($this->connection->lastInsertId());
 
         return $category;
