@@ -4,13 +4,14 @@ namespace MiniECommers\Backend\Models;
 
 class OrderItem
 {
-    private ?int $order_id;
+    private ?int $id = null;
+    private ?int $order_id = null;
 
-    private ?string $product_id;
+    private ?string $product_id = null;
 
-    private ?int $quantity;
+    private ?int $quantity = null;
 
-    private ?int $totalPrice;
+    private ?int $totalPrice = null;
 
     /**
      * Get the value of order_id
@@ -75,7 +76,7 @@ class OrderItem
     /**
      * Get the value of totalPrice
      */
-    public function getTotalPrice()
+    public function getTotalPrice(): ?float
     {
         return $this->totalPrice;
     }
@@ -85,9 +86,29 @@ class OrderItem
      *
      * @return  self
      */
-    public function setTotalPrice($totalPrice)
+    public function setTotalPrice(float $totalPrice)
     {
         $this->totalPrice = $totalPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
 
         return $this;
     }
