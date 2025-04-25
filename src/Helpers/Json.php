@@ -18,7 +18,6 @@ class Json
             throw new \InvalidArgumentException("Input harus berupa array atau object.");
         }
 
-
         // Konversi ke JSON
         $json = json_encode($data);
 

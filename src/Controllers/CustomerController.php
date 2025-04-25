@@ -39,7 +39,10 @@ class CustomerController
             $savedCustomer = $this->customerService->createCustomer($customer);
 
             // Kirim respons JSON untuk pelanggan yang berhasil dibuat
-            echo Json::encode($savedCustomer);
+            echo Json::encode([
+                "message" => "Customer created successfully",
+                "customer" => $savedCustomer
+            ]);
         } catch (\Exception $e) {
             // Kirim respons error
             http_response_code(500);
@@ -64,10 +67,14 @@ class CustomerController
                 // Kirim respons jika pelanggan tidak ditemukan
                 http_response_code(404);
                 echo Json::encode(['error' => "Customer with ID {$id} not found."]);
+                return;
             }
 
             // Kirim respons JSON untuk pelanggan yang ditemukan
-            echo Json::encode($customer);
+            echo Json::encode([
+                "message" => "Customer found",
+                "customer" => $customer
+            ]);
         } catch (\Exception $e) {
             // Kirim respons error
             http_response_code(500);
@@ -87,7 +94,10 @@ class CustomerController
             $customers = $this->customerService->getAllCustomers();
 
             // Kirim respons JSON untuk daftar pelanggan
-            echo Json::encode($customers);
+            echo Json::encode([
+                "message" => "Customers found",
+                "customers" => $customers
+            ]);
         } catch (\Exception $e) {
             // Kirim respons error
             http_response_code(500);
@@ -106,9 +116,9 @@ class CustomerController
         try {
             // Gunakan service untuk menghapus pelanggan
             $this->customerService->deleteCustomer($id);
-
             // Kirim respons sukses
-            http_response_code(204);
+            http_response_code(200);
+            echo Json::encode(['message' => 'Customer deleted successfully']);
         } catch (\Exception $e) {
             // Kirim respons error
             http_response_code(500);

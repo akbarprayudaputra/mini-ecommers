@@ -23,7 +23,10 @@ class ProductController
     {
         $products = $this->productService->getAllProducts();
 
-        echo Json::encode($products);
+        echo Json::encode([
+            "message" => "Products found",
+            "Products" => $products
+        ]);
     }
 
     public function getProductById(int $id)
@@ -77,17 +80,39 @@ class ProductController
         try {
             $requestData = Json::decode(file_get_contents('php://input'), true);
 
+            if ($this->productService->getProductById($id) === null) {
+                http_response_code(404);
+                echo Json::encode([
+                    'error' => 'Product not found'
+                ]);
+                return;
+            }
+
             $product = new Product();
-            $product->setName($requestData['name']);
-            $product->setDescription($requestData['description']);
-            $product->setPrice($requestData['price']);
-            $product->setStockQuantity($requestData['stockQuantity']);
+            $product->setName(htmlspecialchars($requestData['name']));
+            $product->setDescription(htmlspecialchars($requestData['description']));
+            $product->setPrice(htmlspecialchars($requestData['price']));
+            $product->setCategory_id(htmlspecialchars($requestData['categories_id']));
+            $product->setStockQuantity(htmlspecialchars($requestData['stockQuantity']));
             $product->setId($id);
 
             $this->productService->updateProduct($product);
 
             http_response_code(200);
             echo Json::encode(['message' => 'Product updated successfully', "Product" => $product]);
+        } catch (\Throwable $th) {
+            http_response_code(500);
+            echo Json::encode(['error' => $th->getMessage()]);
+        }
+    }
+
+    public function deleteProduct(int $id)
+    {
+        try {
+            $this->productService->deleteProduct($id);
+
+            http_response_code(200);
+            echo Json::encode(['message' => 'Product deleted successfully']);
         } catch (\Throwable $th) {
             http_response_code(500);
             echo Json::encode(['error' => $th->getMessage()]);
