@@ -7,7 +7,8 @@ class Order implements \JsonSerializable
     private ?int $id = null;
     private ?string $orderTime = null;
     private int $customer_id;
-    private ?string $status = null;
+    private ?string $status = "pending";
+    private ?string $total = null;
 
     /**
      * Get the value of orderTime
@@ -97,5 +98,25 @@ class Order implements \JsonSerializable
             "customer_id" => $this->getCustomer_id(),
             "status" => $this->getStatus(),
         ];
+    }
+
+    /**
+     * Get the value of total
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * Set the value of total
+     *
+     * @return  self
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+
+        return $this;
     }
 }

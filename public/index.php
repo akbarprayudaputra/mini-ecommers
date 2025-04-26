@@ -7,6 +7,7 @@ use MiniECommers\Backend\Config\Router;
 use MiniECommers\Backend\Controllers\CategoryController;
 use MiniECommers\Backend\Controllers\CustomerController;
 use MiniECommers\Backend\Controllers\HomeController;
+use MiniECommers\Backend\Controllers\OrderController;
 use MiniECommers\Backend\Controllers\ProductController;
 
 Database::getConnection("development");
@@ -30,5 +31,10 @@ Router::get("/api/categories", CategoryController::class, "getAllCategories", []
 Router::get("/api/category/([0-9a-zA-Z]*)", CategoryController::class, "getCategoryById", []);
 Router::post("/api/category", CategoryController::class, "addCategory", []);
 Router::delete("/api/category/([0-9a-zA-Z]*)", CategoryController::class, "deleteCategory", []);
+
+Router::get("/api/orders", OrderController::class, "getAllOrders", []);
+Router::get("/api/order/([0-9]*)", OrderController::class, "getOrderById", []);
+Router::post("/api/order/([0-9]*)", OrderController::class, "createOrder", []);
+Router::delete("/api/order/([0-9]*)", OrderController::class, "deleteOrder", []);
 
 Router::run();

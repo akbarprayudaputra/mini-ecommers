@@ -63,22 +63,28 @@ class OrderService
         return $this->orderRepository->getAllOrders();
     }
 
+    public function updateOrderPrice(int $id, int $price): void
+    {
+        $this->orderRepository->updateOrderPrice($price, $id);
+    }
+
     /**
      * Delete an order by ID.
      *
      * @param int $id
      * @throws Exception
      */
-    public function deleteOrderById(int $id): void
+    public function deleteOrderById(int $id): int
     {
         // Gunakan transaksi untuk penghapusan yang aman
         Database::beginTransaction();
 
         try {
-            $this->orderRepository->deleteOrderById($id);
+            $result = $this->orderRepository->deleteOrderById($id);
 
             // Commit transaksi setelah sukses
             Database::commitTransaction();
+            return $result;
         } catch (Exception $e) {
             // Rollback transaksi jika terjadi kesalahan
             Database::rollbackTransaction();
